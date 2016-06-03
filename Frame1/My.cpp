@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "My.h"
 
 CMyWinApp theApp;	//global object

@@ -6,7 +6,7 @@ class CMyWinApp :public CWinApp
 {
 public:
 	CMyWinApp() { cout << "CMyWinApp Constructor \n"; }
-	CMyWinApp() { cout << "CMyWinApp Destructor \n"; }
+	~CMyWinApp() { cout << "CMyWinApp Destructor \n"; }
 };
 
 class CMyFrameWnd :public CFrameWnd

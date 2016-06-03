@@ -151,7 +151,6 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Frame1.cpp" />
     <ClCompile Include="MFC.cpp" />
     <ClCompile Include="My.cpp" />
     <ClCompile Include="stdafx.cpp">

@@ -7,7 +7,7 @@ class CObject
 {
 public:
 	CObject() { cout << "CObject Constructor \n"; }
-	CObject() { cout << "CObject Destructor \n"; }
+	~CObject() { cout << "CObject Destructor \n"; }
 };
 
 class CCmdTarget :public CObject
@@ -58,7 +58,7 @@ class CFrameWnd :public CWnd
 {
 public:
 	CFrameWnd() { cout << "CFrameWnd Constructor \n"; }
-	CFrameWnd() { cout << "CFrameWnd Destructor \n"; }
+	~CFrameWnd() { cout << "CFrameWnd Destructor \n"; }
 };
 
 class CView
