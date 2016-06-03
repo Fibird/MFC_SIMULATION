@@ -41,5 +41,8 @@
     <ClCompile Include="MFC.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="My.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
