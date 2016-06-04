@@ -33,7 +33,9 @@ public:
 		return 1;
 	}
 };
+
 class CWnd;
+
 class CWinApp :public CWinThread
 {
 public:
