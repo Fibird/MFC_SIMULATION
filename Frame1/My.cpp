@@ -5,7 +5,7 @@ CMyWinApp theApp;	//global object
 
 bool CMyWinApp::InitInstance()
 {
-	cout << "CMyWinApp::InitInstance \n";
+	//cout << "CMyWinApp::InitInstance \n";
 	m_pMainWnd = new CMyFrameWnd;
 	return true;
 }
@@ -25,6 +25,19 @@ int main()
 	pApp->InitApplication();
 	pApp->InitInstance();
 	pApp->Run();
+	PrintAllClasses();
 	return 0;
 }
 
+void PrintAllClasses()
+{
+	CRuntimeClass* pClass;
+	// just walk through the simple list of registered classes
+	for (pClass = CRuntimeClass::pFirstClass; pClass != NULL; 
+		pClass = pClass->m_pNextClass)
+	{
+		cout << pClass->m_lpszClassName << "\n";
+		cout << pClass->m_nObjectSize << "\n";
+		cout << pClass->m_wSchema << "\n";
+	}
+}

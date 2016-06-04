@@ -18,3 +18,20 @@ public:
 	CMyFrameWnd();
 	~CMyFrameWnd() { }
 };
+
+class CMydoc : public CDocument
+{
+public:
+	CMydoc::CMydoc() {}
+	CMydoc::~CMydoc() {}
+};
+
+class CMyView :public CView
+{
+public:
+	CMyView::CMyView() {}
+	CMyView::~CMyView() {}
+};
+
+// global function
+void PrintAllClasses();
