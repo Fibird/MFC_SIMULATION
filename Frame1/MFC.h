@@ -2,7 +2,6 @@
 #include <iostream>
 
 using namespace std;
-class CWnd;
 
 class CObject
 {
@@ -34,7 +33,7 @@ public:
 		return 1;
 	}
 };
-
+class CWnd;
 class CWinApp :public CWinThread
 {
 public:
@@ -91,7 +90,7 @@ public:
 	virtual bool PreCreateWindow();
 };
 
-class CView
+class CView :public CWnd
 {
 public:
 	CView() { }
