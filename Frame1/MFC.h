@@ -61,7 +61,7 @@ public:
 	~CFrameWnd() { cout << "CFrameWnd Destructor \n"; }
 };
 
-class CView
+class CView :public CWnd
 {
 public:
 	CView() { cout << "CView Constructor \n"; }
