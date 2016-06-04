@@ -14,23 +14,26 @@ public:
 
 class CMyFrameWnd :public CFrameWnd
 {
+	DECLARE_DYNAMIC(CMyFrameWnd) // 在MFC 程序中这里其实是DECLARE_DYNCREATE()
 public:
 	CMyFrameWnd();
 	~CMyFrameWnd() { }
 };
 
-class CMydoc : public CDocument
+class CMyDoc : public CDocument
 {
+	DECLARE_DYNAMIC(CMyDoc)
 public:
-	CMydoc::CMydoc() {}
-	CMydoc::~CMydoc() {}
+	CMyDoc() {}
+	~CMyDoc() {}
 };
 
 class CMyView :public CView
 {
+	DECLARE_DYNAMIC(CMyView)
 public:
-	CMyView::CMyView() {}
-	CMyView::~CMyView() {}
+	CMyView() {}
+	~CMyView() {}
 };
 
 // global function

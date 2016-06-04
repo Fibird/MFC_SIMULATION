@@ -55,6 +55,7 @@ public:
 	CObject() { }
 	~CObject() { }
 	virtual CRuntimeClass* GetRuntimeClass() const;
+	bool IsKindOf(const CRuntimeClass* pClass) const;
 public:
 	static CRuntimeClass classCObject;
 };
@@ -142,7 +143,7 @@ public:
 	virtual bool PreCreateWindow();
 };
 
-class CView
+class CView : public CWnd
 {
 	DECLARE_DYNAMIC(CView) //don't need a ";"!!!
 public:
