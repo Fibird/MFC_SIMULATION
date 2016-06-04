@@ -2,26 +2,27 @@
 #include <iostream>
 
 using namespace std;
+class CWnd;
 
 class CObject
 {
 public:
-	CObject() { cout << "CObject Constructor \n"; }
-	~CObject() { cout << "CObject Destructor \n"; }
+	CObject() { }
+	~CObject() { }
 };
 
 class CCmdTarget :public CObject
 {
 public:
-	CCmdTarget() { cout << "CCmdTarget Constructor \n"; }
-	~CCmdTarget() { cout << "CObject Destructor \n"; }
+	CCmdTarget() { }
+	~CCmdTarget() { }
 };
 
 class CWinThread :public CCmdTarget
 {
 public:
-	CWinThread() { cout << "CWinThread Constructor \n"; }
-	~CWinThread() { cout << "CWinThread Destructor \n"; }
+	CWinThread() { }
+	~CWinThread() { }
 	virtual bool InitInstance()
 	{
 		cout << "CWinThread::InitInstance \n";
@@ -46,7 +47,6 @@ public:
 	}
 	~CWinApp()
 	{
-		cout << "CWinApp Destructor \n";
 	}
 	virtual bool InitApplication()
 	{
@@ -68,15 +68,15 @@ public:
 class CDocument :public CCmdTarget
 {
 public:
-	CDocument() { cout << "CDocument Constructor \n"; }
-	~CDocument() { cout << "CDocument Destructor \n"; }
+	CDocument() { }
+	~CDocument() { }
 };
 
 class CWnd :public CCmdTarget
 {
 public:
-	CWnd() { cout << "CWnd Constructor \n"; }
-	~CWnd() { cout << "CWnd Destructor \n"; }
+	CWnd() { }
+	~CWnd() { }
 	virtual bool Create();
 	bool CreateEx();
 	virtual bool PreCreateWindow();
@@ -85,8 +85,8 @@ public:
 class CFrameWnd :public CWnd
 {
 public:
-	CFrameWnd() { cout << "CFrameWnd Constructor \n"; }
-	~CFrameWnd() { cout << "CFrameWnd Destructor \n"; }
+	CFrameWnd() { }
+	~CFrameWnd() { }
 	bool Create();
 	virtual bool PreCreateWindow();
 };
@@ -94,8 +94,8 @@ public:
 class CView
 {
 public:
-	CView() { cout << "CView Constructor \n"; }
-	~CView() { cout << "CView Destructor \n"; }
+	CView() { }
+	~CView() { }
 };
 
 //global function

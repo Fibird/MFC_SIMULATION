@@ -7,8 +7,8 @@ using namespace std;
 class CMyWinApp :public CWinApp
 {
 public:
-	CMyWinApp() { cout << "CMyWinApp Constructor \n"; }
-	~CMyWinApp() { cout << "CMyWinApp Destructor \n"; }
+	CMyWinApp() { }
+	~CMyWinApp() { }
 	virtual bool InitInstance();
 };
 
@@ -16,5 +16,5 @@ class CMyFrameWnd :public CFrameWnd
 {
 public:
 	CMyFrameWnd();
-	~CMyFrameWnd() { cout << "CMyFrameWnd Destructor \n"; }
+	~CMyFrameWnd() { }
 };
