@@ -81,13 +81,3 @@ CWinApp *AfxGetApp()
 	return theApp.m_pCurrentWinApp;
 }
 
-/*AFX_CLASSINIT::AFX_CLASSINIT(CRuntimeClass * pNewClass)
-{
-	pNewClass->m_pNextClass = CRuntimeClass::pFirstClass;
-	CRuntimeClass::pFirstClass = pNewClass;
-}
-
-CRuntimeClass * CObject::GetRuntimeClass() const
-{
-	return &CObject::classCObject;
-}*/
