@@ -1,17 +1,20 @@
 #pragma once
 #include <iostream>
+
+using namespace std;
 #include "MFC.h"
 
 class CMyWinApp :public CWinApp
 {
 public:
-	CMyWinApp() { cout << "CMyWinApp Constructor \n"; }
-	~CMyWinApp() { cout << "CMyWinApp Destructor \n"; }
+	CMyWinApp() { }
+	~CMyWinApp() { }
+	virtual bool InitInstance();
 };
 
 class CMyFrameWnd :public CFrameWnd
 {
 public:
-	CMyFrameWnd() { cout << "CMyFrameWnd Constructor \n"; }
-	~CMyFrameWnd() { cout << "CMyFrameWnd Destructor \n"; }
+	CMyFrameWnd();
+	~CMyFrameWnd() { }
 };
