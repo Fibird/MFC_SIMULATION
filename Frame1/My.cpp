@@ -21,11 +21,11 @@ CMyFrameWnd::CMyFrameWnd()
 
 int main()
 {
-	/*CWinApp *pApp = AfxGetApp();
+	CWinApp *pApp = AfxGetApp();
 	pApp->InitApplication();
 	pApp->InitInstance();
 	pApp->Run();
-	PrintAllClasses();*/
+	//PrintAllClasses();
 	CMyDoc* pMyDoc = new CMyDoc;
 	CMyView* pMyView = new CMyView;
 
