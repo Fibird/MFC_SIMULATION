@@ -67,13 +67,15 @@ bool CFrameWnd::PreCreateWindow()
 IMPLEMEN_DYNAMIC(CCmdTarget, CObject)
 IMPLEMEN_DYNAMIC(CWinThread, CCmdTarget)
 IMPLEMEN_DYNAMIC(CWinApp, CWinThread)
-IMPLEMEN_DYNAMIC(CWnd, CCmdTarget)
-IMPLEMEN_DYNAMIC(CFrameWnd, CWnd)
+//IMPLEMEN_DYNAMIC(CWnd, CCmdTarget)
+IMPLEMENT_DYNCREATE(CWnd, CCmdTarget)
+//IMPLEMEN_DYNAMIC(CFrameWnd, CWnd)
 IMPLEMEN_DYNAMIC(CDocument, CCmdTarget)
 IMPLEMEN_DYNAMIC(CView, CWnd)
-IMPLEMEN_DYNAMIC(CMyFrameWnd, CFrameWnd)
-IMPLEMEN_DYNAMIC(CMyDoc, CDocument)
-IMPLEMEN_DYNAMIC(CMyView, CView)
+//IMPLEMEN_DYNAMIC(CMyFrameWnd, CFrameWnd)
+//IMPLEMEN_DYNAMIC(CMyDoc, CDocument)
+//IMPLEMEN_DYNAMIC(CMyView, CView)
+IMPLEMENT_DYNCREATE(CFrameWnd, CWnd)
 
 //global function
 CWinApp *AfxGetApp()
@@ -81,3 +83,32 @@ CWinApp *AfxGetApp()
 	return theApp.m_pCurrentWinApp;
 }
 
+CObject* CRuntimeClass::CreateObject()
+{
+	if (m_pfnCreateObject == NULL)
+	{
+		printf("Error: Trying to create object which is not "
+			"DECLARE_DYNCREATE \nor DECLARE_SERIAL: %hs.\n",
+			m_lpszClassName);
+		return NULL;
+	}
+	CObject* pObject = NULL;
+	pObject = (*m_pfnCreateObject)();
+	return pObject;
+}
+
+CRuntimeClass* PASCAL CRuntimeClass::Load()
+{
+	char szClassName[64];
+	CRuntimeClass* pClass;
+	// JJHOU : instead of Load from file, we Load from cin.
+	cout << "enter a class name... ";
+	cin >> szClassName;
+	for (pClass = pFirstClass; pClass != NULL; pClass = pClass->m_pNextClass)
+	{
+		if (strcmp(szClassName, pClass->m_lpszClassName) == 0)
+			return pClass;
+	}
+	printf("Error: Class not found: %s \n", szClassName);
+	return NULL; // not found
+}

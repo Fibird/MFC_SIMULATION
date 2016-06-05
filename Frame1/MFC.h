@@ -18,6 +18,8 @@ struct CRuntimeClass
 	UINT m_wSchema;	//schema number of the loaded class
 	CObject* (PASCAL* m_pfnCreateObject) ();	//NULL=>abstract class
 	CRuntimeClass* m_pBaseClass;
+	CObject* CreateObject();
+	static CRuntimeClass* PASCAL Load();
 
 	//CRuntimeClass objects linked together in simple list
 	static CRuntimeClass* pFirstClass;	//start of class list
@@ -37,6 +39,10 @@ public: \
 	static CRuntimeClass class##class_name;\
 	virtual CRuntimeClass* GetRuntimeClass() const;
 
+#define DECLARE_DYNCREATE(class_name) \
+		DECLARE_DYNAMIC(class_name) \
+		static CObject* PASCAL CreateObject();
+
 #define _IMPLEMENT_RUNTIMECLASS(class_name, base_class_name, wSchema, pfnNew)	\
 	static char _lpsz##class_name[] = #class_name;	\
 	CRuntimeClass class_name::class##class_name = { \
@@ -49,6 +55,12 @@ public: \
 #define IMPLEMEN_DYNAMIC(class_name, base_class_name) \
 		_IMPLEMENT_RUNTIMECLASS(class_name, base_class_name, 0xFFFF, NULL)
 
+#define IMPLEMENT_DYNCREATE(class_name, base_class_name) \
+		CObject* PASCAL class_name::CreateObject() \
+		{ return new class_name; } \
+		_IMPLEMENT_RUNTIMECLASS(class_name, base_class_name, 0xFFFF, \
+						class_name::CreateObject)
+
 class CObject
 {
 public:
@@ -58,6 +70,7 @@ public:
 	bool IsKindOf(const CRuntimeClass* pClass) const;
 public:
 	static CRuntimeClass classCObject;
+	virtual void SayHello() { cout << "Hello CObject \n"; }
 };
 
 class CCmdTarget :public CObject
@@ -124,23 +137,27 @@ public:
 
 class CWnd :public CCmdTarget
 {
-	DECLARE_DYNAMIC(CWnd) //don't need a ";"!!!
+	//DECLARE_DYNAMIC(CWnd) //don't need a ";"!!!
+	DECLARE_DYNCREATE(CWnd)
 public:
 	CWnd() { }
 	~CWnd() { }
 	virtual bool Create();
 	bool CreateEx();
 	virtual bool PreCreateWindow();
+	void SayHello() { cout << "Hello CWnd \n"; }
 };
 
 class CFrameWnd :public CWnd
 {
-	DECLARE_DYNAMIC(CFrameWnd)	//don't need a ";"!!!
+	//DECLARE_DYNAMIC(CFrameWnd)	//don't need a ";"!!!
+	DECLARE_DYNCREATE(CFrameWnd)
 public:
 	CFrameWnd() { }
 	~CFrameWnd() { }
 	bool Create();
 	virtual bool PreCreateWindow();
+	void SayHello() { cout << "Hello CFrameWnd \n"; }
 };
 
 class CView : public CWnd

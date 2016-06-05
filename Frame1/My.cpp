@@ -15,31 +15,34 @@ CMyFrameWnd::CMyFrameWnd()
 	cout << "CMyFrameWnd::CMyFrameWnd \n";
 	Create();
 }
+IMPLEMENT_DYNCREATE(CMyFrameWnd, CFrameWnd)
+IMPLEMENT_DYNCREATE(CMyDoc, CDocument)
+IMPLEMENT_DYNCREATE(CMyView, CView)
 //--------------------------------------------------
 //main function
 //--------------------------------------------------
 
 int main()
 {
-	/*CWinApp *pApp = AfxGetApp();
+	CWinApp *pApp = AfxGetApp();
 	pApp->InitApplication();
 	pApp->InitInstance();
 	pApp->Run();
-	PrintAllClasses();*/
+	//PrintAllClasses();
 	CMyDoc* pMyDoc = new CMyDoc;
 	CMyView* pMyView = new CMyView;
 
-	cout << "pMyDoc->IsKindOf(RUNTIME_CLASS(CMyDoc))\t" << pMyDoc->IsKindOf(RUNTIME_CLASS(CMyDoc)) << endl; //It should be TRUE
-	cout << "pMyDoc->IsKindOf(RUNTIME_CLASS(CDocument))\t" << pMyDoc->IsKindOf(RUNTIME_CLASS(CDocument)) << endl; // It should be TRUE
-	cout << "pMyDoc->IsKindOf(RUNTIME_CLASS(CCmdTarget))\t" << pMyDoc->IsKindOf(RUNTIME_CLASS(CCmdTarget)) << endl; // It should be TRUE
-	cout << "pMyDoc->IsKindOf(RUNTIME_CLASS(CObject))\t" << pMyDoc->IsKindOf(RUNTIME_CLASS(CObject)) << endl; // It should be TRUE
-	cout << "pMyDoc->IsKindOf(RUNTIME_CLASS(CWinApp))\t" << pMyDoc->IsKindOf(RUNTIME_CLASS(CWinApp)) << endl; // It should be FALSE
-	cout << "pMyDoc->IsKindOf(RUNTIME_CLASS(CView))\t" << pMyDoc->IsKindOf(RUNTIME_CLASS(CView)) << endl; // It should be FALSE
-	cout << "pMyView->IsKindOf(RUNTIME_CLASS(CView))\t" << pMyView->IsKindOf(RUNTIME_CLASS(CView)) << endl; // It should be TRUE
-	cout << "pMyView->IsKindOf(RUNTIME_CLASS(CObject))\t" << pMyView->IsKindOf(RUNTIME_CLASS(CObject)) << endl; // It should be TRUE
-	cout << "pMyView->IsKindOf(RUNTIME_CLASS(CWnd))\t" << pMyView->IsKindOf(RUNTIME_CLASS(CWnd)) << endl; // It should be TRUE
-	cout << "pMyView->IsKindOf(RUNTIME_CLASS(CFrameWnd))\t" << pMyView->IsKindOf(RUNTIME_CLASS(CFrameWnd)) << endl; // It should be FALSE
-	
+	//Test Dynamic Creation
+	CRuntimeClass* pClassRef;
+	CObject* pOb;
+	while (1)
+	{
+		if ((pClassRef = CRuntimeClass::Load()) == NULL)
+			break;
+		pOb = pClassRef->CreateObject();
+		if (pOb != NULL)
+			pOb->SayHello();
+	}
 	return 0;
 }
 
