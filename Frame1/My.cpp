@@ -3,11 +3,11 @@
 
 CMyWinApp theApp;	//global object
 
-bool CMyWinApp::InitInstance()
+BOOL CMyWinApp::InitInstance()
 {
 	//cout << "CMyWinApp::InitInstance \n";
 	m_pMainWnd = new CMyFrameWnd;
-	return true;
+	return TRUE;
 }
 
 CMyFrameWnd::CMyFrameWnd()

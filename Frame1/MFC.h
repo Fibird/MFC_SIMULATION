@@ -1,12 +1,13 @@
 #pragma once
+#define BOOL int
+#define TRUE 1
+#define FALSE 0
 #define LPCSTR LPSTR
 typedef char* LPSTR;
 #define UINT int
 #define PASCAL _stdcall
 
 #include <iostream>
-
-using namespace std;
 
 class CObject;
 
@@ -55,7 +56,7 @@ public:
 	CObject() { }
 	~CObject() { }
 	virtual CRuntimeClass* GetRuntimeClass() const;
-	bool IsKindOf(const CRuntimeClass* pClass) const;
+	BOOL IsKindOf(const CRuntimeClass* pClass) const;
 public:
 	static CRuntimeClass classCObject;
 };
@@ -74,9 +75,9 @@ class CWinThread :public CCmdTarget
 public:
 	CWinThread() { }
 	~CWinThread() { }
-	virtual bool InitInstance()
+	virtual BOOL InitInstance()
 	{
-		return true;
+		return TRUE;
 	}
 	virtual int Run()
 	{
@@ -100,13 +101,13 @@ public:
 	~CWinApp()
 	{
 	}
-	virtual bool InitApplication()
+	virtual BOOL InitApplication()
 	{
-		return true;
+		return TRUE;
 	}
-	virtual bool InitInstance()
+	virtual BOOL InitInstance()
 	{
-		return true;
+		return TRUE;
 	}
 	virtual int Run()
 	{
@@ -128,9 +129,9 @@ class CWnd :public CCmdTarget
 public:
 	CWnd() { }
 	~CWnd() { }
-	virtual bool Create();
-	bool CreateEx();
-	virtual bool PreCreateWindow();
+	virtual BOOL Create();
+	BOOL CreateEx();
+	virtual BOOL PreCreateWindow();
 };
 
 class CFrameWnd :public CWnd
@@ -139,8 +140,8 @@ class CFrameWnd :public CWnd
 public:
 	CFrameWnd() { }
 	~CFrameWnd() { }
-	bool Create();
-	virtual bool PreCreateWindow();
+	BOOL Create();
+	virtual BOOL PreCreateWindow();
 };
 
 class CView : public CWnd
