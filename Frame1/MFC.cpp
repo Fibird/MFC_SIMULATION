@@ -3,35 +3,37 @@
 
 extern CMyWinApp theApp;
 
-bool CWnd::Create()
+BOOL CWnd::Create()
 {
 	cout << "CWnd::Create \n";
-	return true;
+	return TRUE;
 }
 
-bool CWnd::CreateEx()
+BOOL CWnd::CreateEx()
 {
 	cout << "CWnd::CreateEx \n";
-	return true;
+	PreCreateWindow();
+	return TRUE;
 }
 
-bool CWnd::PreCreateWindow()
+BOOL CWnd::PreCreateWindow()
 {
 	cout << "CWnd::PreCreateWindow \n";
 	return 0;
 }
 
-bool CFrameWnd::Create()
+BOOL CFrameWnd::Create()
 {
 	cout << "CFrameWnd::Create \n";
-	CreateEx();
-	return true;
+	CreateEx();	//This is a virtual function, and CFrameWnd didn't override it
+				//so it triggers CWnd::CreateEx()
+	return TRUE;
 }
 
-bool CFrameWnd::PreCreateWindow()
+BOOL CFrameWnd::PreCreateWindow()
 {
 	cout << "CFrameWnd::PreCreateWindow \n";
-	return false;
+	return FALSE;
 }
 
 CWinApp *AfxGetApp()
