@@ -1,12 +1,44 @@
 #pragma once
+
+#define BOOL int
+#define TRUE 1
+#define FALSE 0
 #define LPCSTR LPSTR
 typedef char* LPSTR;
 #define UINT int
+#define DWORD unsigned long 
+#define BYTE unsigned char
+#define WORD unsigned short
+#define INT int
+#define LONG long
 #define PASCAL _stdcall
 
-#include <iostream>
+#define WM_COMMAND		0x0111
+#define CObjectid		0xffff
+#define CCmdTargetid	1
+#define CWinThreadid	11
+#define CWinAppid		111
+#define CMWinAppid		1111
+#define CWndid			12
+#define CFrameWndid		121
+#define CMyFrameWndid	1211
+#define CViewid			122
+#define CMyViewid		1221
+#define CDocmentid		13
+#define CMydocid		131
 
-using namespace std;
+#include <iostream>
+/////////////////////////////////
+//Window message map handling
+struct AFX_MSGMAP_ENTRY;	//declared below after wnd
+
+struct AFX_MSGMAP
+{
+	AFX_MSGMAP *pBaseMessageMap;
+	AFX_MSGMAP_ENTRY *lpEntries;
+};
+
+#define DECLARE_MESSAGE_MAP() \
 
 class CObject;
 
@@ -67,7 +99,7 @@ public:
 	CObject() { }
 	~CObject() { }
 	virtual CRuntimeClass* GetRuntimeClass() const;
-	bool IsKindOf(const CRuntimeClass* pClass) const;
+	BOOL IsKindOf(const CRuntimeClass* pClass) const;
 public:
 	static CRuntimeClass classCObject;
 	virtual void SayHello() { cout << "Hello CObject \n"; }
@@ -87,9 +119,9 @@ class CWinThread :public CCmdTarget
 public:
 	CWinThread() { }
 	~CWinThread() { }
-	virtual bool InitInstance()
+	virtual BOOL InitInstance()
 	{
-		return true;
+		return TRUE;
 	}
 	virtual int Run()
 	{
@@ -113,13 +145,13 @@ public:
 	~CWinApp()
 	{
 	}
-	virtual bool InitApplication()
+	virtual BOOL InitApplication()
 	{
-		return true;
+		return TRUE;
 	}
-	virtual bool InitInstance()
+	virtual BOOL InitInstance()
 	{
-		return true;
+		return TRUE;
 	}
 	virtual int Run()
 	{
@@ -142,9 +174,9 @@ class CWnd :public CCmdTarget
 public:
 	CWnd() { }
 	~CWnd() { }
-	virtual bool Create();
-	bool CreateEx();
-	virtual bool PreCreateWindow();
+	virtual BOOL Create();
+	BOOL CreateEx();
+	virtual BOOL PreCreateWindow();
 	void SayHello() { cout << "Hello CWnd \n"; }
 };
 
@@ -155,8 +187,8 @@ class CFrameWnd :public CWnd
 public:
 	CFrameWnd() { }
 	~CFrameWnd() { }
-	bool Create();
-	virtual bool PreCreateWindow();
+	BOOL Create();
+	virtual BOOL PreCreateWindow();
 	void SayHello() { cout << "Hello CFrameWnd \n"; }
 };
 

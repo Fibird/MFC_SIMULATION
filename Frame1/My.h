@@ -9,7 +9,7 @@ class CMyWinApp :public CWinApp
 public:
 	CMyWinApp() { }
 	~CMyWinApp() { }
-	virtual bool InitInstance();
+	virtual BOOL InitInstance();
 };
 
 class CMyFrameWnd :public CFrameWnd

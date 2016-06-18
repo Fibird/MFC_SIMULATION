@@ -21,47 +21,47 @@ CRuntimeClass* CObject::GetRuntimeClass() const
 	return &CObject::classCObject;
 }
 
-bool CObject::IsKindOf(const CRuntimeClass * pClass) const
+BOOL CObject::IsKindOf(const CRuntimeClass * pClass) const
 {
 	CRuntimeClass* pClassThis = GetRuntimeClass();
 	while (pClassThis != NULL)
 	{
 		if (pClassThis == pClass)
-			return true;
+			return TRUE;
 		pClassThis = pClassThis->m_pBaseClass;
 	}
-	return false;		//walk to the top, no match
+	return FALSE;		//walk to the top, no match
 }
 
-bool CWnd::Create()
+BOOL CWnd::Create()
 {
 	//cout << "CWnd::Create \n";
-	return true;
+	return TRUE;
 }
 
-bool CWnd::CreateEx()
+BOOL CWnd::CreateEx()
 {
 	//cout << "CWnd::CreateEx \n";
-	return true;
+	return TRUE;
 }
 
-bool CWnd::PreCreateWindow()
+BOOL CWnd::PreCreateWindow()
 {
 	//cout << "CWnd::PreCreateWindow \n";
 	return 0;
 }
 
-bool CFrameWnd::Create()
+BOOL CFrameWnd::Create()
 {
 	//cout << "CFrameWnd::Create \n";
 	CreateEx();
-	return true;
+	return TRUE;
 }
 
-bool CFrameWnd::PreCreateWindow()
+BOOL CFrameWnd::PreCreateWindow()
 {
 	//cout << "CFrameWnd::PreCreateWindow \n";
-	return false;
+	return FALSE;
 }
 
 IMPLEMEN_DYNAMIC(CCmdTarget, CObject)
