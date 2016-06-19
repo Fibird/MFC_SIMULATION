@@ -10,37 +10,33 @@ public:
 	CMyWinApp() { }
 	~CMyWinApp() { }
 	virtual BOOL InitInstance();
+	DECLARE_MESSAGE_MAP()
 };
 
 class CMyFrameWnd :public CFrameWnd
 {
-	//DECLARE_DYNAMIC(CMyFrameWnd) // 在MFC 程序中这里其实是DECLARE_DYNCREATE()
-	DECLARE_DYNCREATE(CMyFrameWnd)
 public:
 	CMyFrameWnd();
 	~CMyFrameWnd() { }
 	void SayHello() { cout << "Hello CMyFrameWnd \n"; }
+	DECLARE_MESSAGE_MAP()
 };
 
 class CMyDoc : public CDocument
 {
-	//DECLARE_DYNAMIC(CMyDoc)
-	DECLARE_DYNCREATE(CMyDoc)
 public:
 	CMyDoc() {}
 	~CMyDoc() {}
 	void SayHello() { cout << "Hello CMyDoc \n"; }
+	DECLARE_MESSAGE_MAP()
 };
 
-class CMyView :public CView
+class CMyView : public CView
 {
-	//DECLARE_DYNAMIC(CMyView)
-	DECLARE_DYNCREATE(CMyView)
 public:
 	CMyView() {}
 	~CMyView() {}
 	void SayHello() { cout << "Hello CMyView \n"; }
+	DECLARE_MESSAGE_MAP()
 };
 
-// global function
-void PrintAllClasses();

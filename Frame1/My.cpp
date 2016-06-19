@@ -15,9 +15,60 @@ CMyFrameWnd::CMyFrameWnd()
 	cout << "CMyFrameWnd::CMyFrameWnd \n";
 	Create();
 }
-IMPLEMENT_DYNCREATE(CMyFrameWnd, CFrameWnd)
-IMPLEMENT_DYNCREATE(CMyDoc, CDocument)
-IMPLEMENT_DYNCREATE(CMyView, CView)
+
+BEGIN_MESSAGE_MAP(CMyWinApp, CWinApp)
+	ON_COMMAND(CMyWinAppid, 0)
+END_MESSAGE_MAP()
+
+BEGIN_MESSAGE_MAP(CMyFrameWnd, CFrameWnd)
+	ON_COMMAND(CMyFrameWndid, 0)
+END_MESSAGE_MAP()
+
+BEGIN_MESSAGE_MAP(CMyDoc, CDocument)
+	ON_COMMAND(CMyViewid, 0)
+END_MESSAGE_MAP()
+
+BEGIN_MESSAGE_MAP(CMyView, CView)
+	ON_COMMAND(CMyViewid, 0)
+END_MESSAGE_MAP()
+
+void printlpEntries(AFX_MSGMAP_ENTRY* lpEntry)
+{
+	struct {
+		int classid;
+		char* classname;
+
+	} classinfo[] = {
+		CCmdTargetid, "CCmdTarget",
+		CWinThreadid, "CWinThread",
+		CWinAppid, "CWinApp",
+		CMyWinAppid, "CMyWinApp",
+		CViewid, "CView",
+		CMyViewid, "CMyView",
+		CDocmentid, "CDocment",
+		CMyDocid, "CMyDoc",
+		0, "	"
+	};
+
+	for (int i = 0; classinfo[i].classid != 0; i++)
+	{
+		if (classinfo[i].classid == lpEntry->nID)
+		{
+			cout << lpEntry->nID << "	";
+			cout << classinfo[i].classname << endl;
+			break;
+		}
+	}
+}
+
+void MsgMapPrinting(AFX_MSGMAP* pMessageMap)
+{
+	for (; pMessageMap != NULL; pMessageMap = pMessageMap->pBaseMessageMap)
+	{
+		AFX_MSGMAP_ENTRY *lpEntry = pMessageMap->lpEntries;
+		printlpEntries(lpEntry);
+	}
+}
 //--------------------------------------------------
 //main function
 //--------------------------------------------------
@@ -31,30 +82,22 @@ int main()
 	//PrintAllClasses();
 	CMyDoc* pMyDoc = new CMyDoc;
 	CMyView* pMyView = new CMyView;
+	CFrameWnd* pMyFrame = (CFrameWnd*)pApp->m_pMainWnd;
 
-	//Test Dynamic Creation
-	CRuntimeClass* pClassRef;
-	CObject* pOb;
-	while (1)
-	{
-		if ((pClassRef = CRuntimeClass::Load()) == NULL)
-			break;
-		pOb = pClassRef->CreateObject();
-		if (pOb != NULL)
-			pOb->SayHello();
-	}
+	//output Message Map construction
+	AFX_MSGMAP* pMessageMap = pMyView->GetMessageMap();
+	cout << endl << "CMyView Message Map : " << endl;
+	MsgMapPrinting(pMessageMap);
+	pMessageMap = pMyDoc->GetMessageMap();
+	cout << endl << "CMyDoc Message Map : " << endl;
+	MsgMapPrinting(pMessageMap);
+
+	pMessageMap = pMyFrame->GetMessageMap();
+	cout << endl << "CMyFrameWnd Message Map : " << endl;
+	MsgMapPrinting(pMessageMap);
+
+	pMessageMap = pApp->GetMessageMap();
+	cout << endl << "CMyWinApp Message Map : " << endl;
+	MsgMapPrinting(pMessageMap);
 	return 0;
-}
-
-void PrintAllClasses()
-{
-	CRuntimeClass* pClass;
-	// just walk through the simple list of registered classes
-	for (pClass = CRuntimeClass::pFirstClass; pClass != NULL; 
-		pClass = pClass->m_pNextClass)
-	{
-		cout << pClass->m_lpszClassName << "\n";
-		cout << pClass->m_nObjectSize << "\n";
-		cout << pClass->m_wSchema << "\n";
-	}
 }

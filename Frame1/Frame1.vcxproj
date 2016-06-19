@@ -145,6 +145,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="afxmsg_.h" />
     <ClInclude Include="MFC.h" />
     <ClInclude Include="My.h" />
     <ClInclude Include="stdafx.h" />
